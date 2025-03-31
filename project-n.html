@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor Animada</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .message {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .flower-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .flower {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: 400px;
+            height: 400px;
+            justify-content: center;
+            align-items: center;
+        }
+        .petal {
+            width: 100px;
+            height: 200px;
+            background: yellow;
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            transform: rotate(var(--angle)) translateY(-100px);
+            animation: bloom 2s forwards ease-in-out var(--delay);
+        }
+        .center {
+            width: 120px;
+            height: 120px;
+            background: orange;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .stem {
+            width: 20px;
+            height: 200px;
+            background: green;
+            position: relative;
+            margin-top: -20px;
+            border-radius: 10px;
+            animation: grow 2s forwards ease-in-out 1s;
+        }
+        @keyframes bloom {
+            from {
+                opacity: 0;
+                transform: rotate(var(--angle)) translateY(-100px) scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(var(--angle)) translateY(-100px) scale(1);
+            }
+        }
+        @keyframes grow {
+            from {
+                height: 0;
+            }
+            to {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">🌻 ¿Me perdonas? 🥺</div>
+    <div class="flower-container">
+        <div class="flower" id="flower">
+            <div class="center"></div>
+        </div>
+        <div class="stem"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const flower = document.getElementById("flower");
+            for (let i = 0; i < 12; i++) {
+                let petal = document.createElement("div");
+                petal.classList.add("petal");
+                petal.style.setProperty("--angle", `${i * 30}deg`);
+                petal.style.setProperty("--delay", `${i * 0.2}s`);
+                flower.appendChild(petal);
+            }
+        });
+    </script>
+</body>
+</html>
